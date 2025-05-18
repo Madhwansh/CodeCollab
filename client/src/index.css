@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/* =======================
+   Fonts & Base Styling
+========================== */
+body {
+  font-family: "Source Code Pro", monospace;
+  background-color: #0f0f1c;
+  color: #e0e0e0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* =======================
+   Scrollbar Styling
+========================== */
+@layer utilities {
+  .terminal-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-track {
+    @apply bg-green-900/10;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-green-500/30 rounded-full;
+  }
+
+  /* Fade-In Animation */
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* =======================
+   Button & Divider Styling
+========================== */
+.google-hr {
+  @apply border-green-500/40 my-6;
+}
+
+.google-btn {
+  @apply flex items-center justify-center mx-auto border border-green-500/40 rounded-lg py-2 px-4 text-green-300 hover:bg-green-500/10 transition;
+}
+
+/* =======================
+   Noise Texture Overlay
+========================== */
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* =======================
+   Grid Scanline Animation
+========================== */
+@keyframes scanline {
+  0% {
+    background-position: 0 -100vh;
+  }
+  100% {
+    background-position: 0 100vh;
+  }
+}
+
+.bg-grid-scan {
+  animation: scanline 10s linear infinite;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 95%,
+    #0f03 95%,
+    #0f03 100%
+  );
+  background-size: 100% 2px;
+}
+
+/* =======================
+   Card Hover Depth (Optional Enhancements)
+========================== */
+.card-hover-depth {
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+
+.card-hover-depth:hover {
+  transform: scale(1.02) rotateX(3deg) rotateY(3deg);
+  box-shadow: 0 0 20px rgba(0, 255, 150, 0.3);
+}
+
+.split-container {
+  position: relative;
+  height: 100%;
+  display: flex; /* necessary for flex-based layout */
+}
+
+.gutter {
+  background-color: rgba(100, 100, 100, 0.2);
+  pointer-events: all; /* allow dragging */
+}
+
+.gutter.gutter-horizontal {
+  width: 8px;
+  cursor: col-resize;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.gutter.gutter-horizontal:hover {
+  background-color: rgba(100, 100, 100, 0.4);
+}
